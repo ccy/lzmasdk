@@ -3,8 +3,10 @@
 goto RAD_STUDIO
 
 :RAD_STUDIO
+if not exist "win32\" mkdir win32
 bcc32.exe -c -nWin32 -q -D_LZMA_PROB32 -D_WIN32 ..\C\Threads.c ..\C\LzFind.c ..\C\LzFindMt.c ..\C\LzmaDec.c ..\C\LzmaEnc.c
 
+if not exist "win64\" mkdir win64
 bcc64.exe -c -q -D_LZMA_PROB32 -D_WIN64 ..\C\Threads.c ..\C\LzFind.c ..\C\LzFindMt.c ..\C\LzmaDec.c ..\C\LzmaEnc.c
 move *.o Win64
 goto :End
