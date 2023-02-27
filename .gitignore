@@ -1,0 +1,17 @@
+*.local
+*.res
+*.identcache
+*.dsk
+*.tvsconfig
+*.dres
+*.tlb
+*.sds
+*Resource.rc
+*.stat
+__recovery
+*.otares
+*.res
+**/Win32/debug/
+**/Win32/release/
+**/Win64/debug/
+**/Win64/release/
