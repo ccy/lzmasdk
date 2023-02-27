@@ -9,5 +9,9 @@
 *Resource.rc
 *.stat
 __recovery
-*.dproj
 *.otares
+*.res
+**/Win32/debug/
+**/Win32/release/
+**/Win64/debug/
+**/Win64/release/
