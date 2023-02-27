@@ -44,6 +44,12 @@ function {$ifdef UNDERSCOREIMPORTNAME}_Semaphore_Create{$else}Semaphore_Create{$
 function {$ifdef UNDERSCOREIMPORTNAME}_Thread_Create{$else}Thread_Create{$endif}(var p: TCThread; func: TThread_Func_Type; param:
     LPVOID): TWRes; cdecl; external;
 
+function {$ifdef UNDERSCOREIMPORTNAME}_Thread_Wait_Close{$else}Thread_Wait_Close{$endif}(var p: THandle): Cardinal; cdecl; external name _PU + 'Thread_Wait_Close';
+
+function {$ifdef UNDERSCOREIMPORTNAME}_Semaphore_OptCreateInit{$else}Semaphore_OptCreateInit{$endif}(var p: THandle; initCount: Cardinal; maxCount: Cardinal): Cardinal; cdecl; external name _PU + 'Semaphore_OptCreateInit';
+
+function {$ifdef UNDERSCOREIMPORTNAME}_Thread_Create_With_Affinity{$else}Thread_Create_With_Affinity{$endif}(var p: THandle; func: TThread_Func_Type; param: Pointer; var affinity : Cardinal): Cardinal; cdecl; external name _PU + 'Thread_Create_With_Affinity';
+
 implementation
 
 {$ifdef Win32}

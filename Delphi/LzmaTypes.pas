@@ -63,9 +63,11 @@ type
 
   TCompressProgressProc = function(p: PICompressProgress; inSize: UInt64; outSize: UInt64): TSRes; cdecl;
 
-function _wcscpy(dest, src: PWideChar): PWideChar; cdecl; external 'msvcrt.dll' name 'wcscpy';
-
 procedure CheckLzma(const aStatus: Integer);
+
+procedure {$ifdef UNDERSCOREIMPORTNAME}_exit{$else}exit{$endif}(const Status: Integer); cdecl; external 'msvcrt.dll';
+
+function HRESULT_FROM_WIN32(x: Integer): HRESULT; cdecl;
 
 implementation
 
@@ -95,6 +97,16 @@ procedure TISzAlloc.Init;
 begin
   SzAlloc := SzAllocProc;
   SzFree := SzFreeProc;
+end;
+
+function HRESULT_FROM_WIN32(x: Integer): HRESULT; cdecl;
+const
+  FACILITY_WIN32                       = 7;
+begin
+  Result := x;
+  if Result <> 0 then
+    Result := ((Result and $0000FFFF) or
+      (FACILITY_WIN32 shl 16) or HRESULT($80000000));
 end;
 
 end.

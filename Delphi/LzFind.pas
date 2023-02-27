@@ -77,15 +77,9 @@ type
 
 function {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_NeedMove{$else}MatchFinder_NeedMove{$endif}(var p: TCMatchFinder): Integer; cdecl; external;
 
-function {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_GetPointerToCurrentPos{$else}MatchFinder_GetPointerToCurrentPos{$endif}(var p: TCMatchFinder): TBytes;
-    cdecl; external;
-
 procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_MoveBlock{$else}MatchFinder_MoveBlock{$endif}(var p: TCMatchFinder); cdecl; external;
 
 procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_ReadIfRequired{$else}MatchFinder_ReadIfRequired{$endif}(var p: TCMatchFinder); cdecl; external;
-
-procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_ReduceOffsets{$else}MatchFinder_ReduceOffsets{$endif}(var p: TCMatchFinder; subValue: UInt32);
-    cdecl; external;
 
 procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_Normalize3{$else}MatchFinder_Normalize3{$endif}(subValue: UInt32; items: PCLzRef; numItems:
     UInt32); cdecl; external;
@@ -109,14 +103,24 @@ procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_Free{$else}MatchFinder_Free{
 procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_CreateVTable{$else}MatchFinder_CreateVTable{$endif}(var p: TCMatchFinder; var vTable:
     TIMatchFinder); cdecl; external;
 
+procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_Init_LowHash{$else}MatchFinder_Init_LowHash{$endif}(var p: TCMatchFinder); cdecl; external name _PU + 'MatchFinder_Init_LowHash';
+
+procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_Init_HighHash{$else}MatchFinder_Init_HighHash{$endif}(var p: TCMatchFinder); cdecl; external name _PU + 'MatchFinder_Init_HighHash';
+
+function {$ifdef UNDERSCOREIMPORTNAME}_GetMatchesSpecN_2{$else}GetMatchesSpecN_2{$endif}(const lenLimit : PByte; pos : NativeInt; const cur : PByte; son : PCLzRef; _cutValue : Cardinal; d : PCardinal; _maxLen : NativeInt; const hash : PCardinal; const limit : PCardinal; const size : PCardinal; _cyclicBufferPos : NativeInt; _cyclicBufferSize : Cardinal; posRes : PCardinal) : PCardinal; cdecl; external name _PU + 'GetMatchesSpecN_2';
+
+procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_Init_4{$else}MatchFinder_Init_4{$endif}(var p: TCMatchFinder); cdecl; external name _PU + 'MatchFinder_Init_4';
+
 implementation
 
 uses System.Win.Crtl;
 
 {$ifdef Win32}
   {$L Win32\LzFind.obj}
+  {$L Win32\LzFindOpt.obj}
 {$else}
   {$L Win64\LzFind.o}
+  {$L Win64\LzFindOpt.o}
 {$endif}
 
 end.

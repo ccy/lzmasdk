@@ -90,6 +90,8 @@ procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinderMt_CreateVTable{$else}MatchFi
 
 procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinderMt_ReleaseStream{$else}MatchFinderMt_ReleaseStream{$endif}(var p: TCMatchFinderMt); cdecl; external;
 
+function {$ifdef UNDERSCOREIMPORTNAME}_MatchFinderMt_InitMt{$else}MatchFinderMt_InitMt{$endif}(var p: TCMatchFinderMt): Integer; cdecl; external;
+
 implementation
 
 uses System.Win.Crtl, Winapi.Windows;
@@ -101,3 +103,4 @@ uses System.Win.Crtl, Winapi.Windows;
 {$endif}
 
 end.
+
