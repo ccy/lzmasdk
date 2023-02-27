@@ -35,9 +35,23 @@ you can change this h file or h files included in this file.
    So we can use MY_ARRAY_NEW macro instead of new[] operator. */
 
 #if defined(_MSC_VER) && (_MSC_VER == 1200) && !defined(_WIN64)
-  #define MY_ARRAY_NEW(p, T, size) p = new T[(size > (unsigned)0xFFFFFFFF / sizeof(T)) ? (unsigned)0xFFFFFFFF / sizeof(T) : size];
+  #define MY_ARRAY_NEW(p, T, size) p = new T[((size) > (unsigned)0xFFFFFFFF / sizeof(T)) ? (unsigned)0xFFFFFFFF / sizeof(T) : (size)];
 #else
   #define MY_ARRAY_NEW(p, T, size) p = new T[size];
+#endif
+
+#if (defined(__GNUC__) && (__GNUC__ >= 8))
+  #define MY_ATTR_NORETURN __attribute__((noreturn))
+#elif (defined(__clang__) && (__clang_major__ >= 3))
+  #if __has_feature(cxx_attributes)
+    #define MY_ATTR_NORETURN [[noreturn]]
+  #else
+    #define MY_ATTR_NORETURN __attribute__ ((noreturn))
+  #endif
+#elif (defined(_MSC_VER) && (_MSC_VER >= 1900))
+  #define MY_ATTR_NORETURN [[noreturn]]
+#else
+  #define MY_ATTR_NORETURN
 #endif
 
 #endif

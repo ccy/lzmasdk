@@ -63,7 +63,8 @@ void CPercentPrinter::GetPercents()
   {
     char c = '%';
     UInt64 val = 0;
-    if (Total == (UInt64)(Int64)-1)
+    if (Total == (UInt64)(Int64)-1 ||
+        (Total == 0 && Completed != 0))
     {
       val = Completed >> 20;
       c = 'M';
@@ -143,7 +144,7 @@ void CPercentPrinter::Print()
 
     _tempU = FileName;
     _so->Normalize_UString(_tempU);
-    StdOut_Convert_UString_to_AString(_tempU, _temp);
+    _so->Convert_UString_to_AString(_tempU, _temp);
     if (_s.Len() + _temp.Len() > MaxLen)
     {
       unsigned len = FileName.Len();
@@ -157,7 +158,7 @@ void CPercentPrinter::Print()
         _tempU.Delete(len / 2, _tempU.Len() - len);
         _tempU.Insert(len / 2, L" . ");
         _so->Normalize_UString(_tempU);
-        StdOut_Convert_UString_to_AString(_tempU, _temp);
+        _so->Convert_UString_to_AString(_tempU, _temp);
         if (_s.Len() + _temp.Len() <= MaxLen)
           break;
       }
