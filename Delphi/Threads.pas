@@ -20,7 +20,7 @@ type
 
 function {$ifdef UNDERSCOREIMPORTNAME}__beginthreadex{$else}_beginthreadex{$endif}(__security_attr: Pointer; __stksize: Cardinal;
     __start: TThread_Func_Type; __arg: Pointer; __create_flags: Cardinal; var
-    __thread_id: Cardinal): Cardinal; cdecl; external msvcrt name '_beginthreadex';
+    __thread_id: Cardinal): Cardinal; cdecl; external 'msvcrt.dll' name '_beginthreadex';
 
 function {$ifdef UNDERSCOREIMPORTNAME}_Event_Reset{$else}Event_Reset{$endif}(var p: TCEvent): TWRes; cdecl; external;
 
