@@ -27,7 +27,7 @@ type
     hashMask: UInt32;
     cutValue: UInt32;
 
-    bufferBase: PByte;
+    bufBase: PByte;
     stream: PISeqInStream;
     streamEndWasReached: Integer;
 
@@ -42,10 +42,14 @@ type
     bigHash: Integer;
     historySize: UInt32;
     fixedHashSize: UInt32;
-    hashSizeSum: UInt32;
-    numSons: UInt32;
+    numHashBytes_Min: Byte;
+    numHashOutBits: Byte;
+    _pad2_: array[0..1] of Byte;
     result: TSRes;
     crc: array[0..255] of UInt32;
+    numRefs: SIZE_T;
+
+    expectedDataSize: UInt64;
   end;
 
   //typedef void (*Mf_Init_Func)(void *object);
@@ -113,7 +117,7 @@ procedure {$ifdef UNDERSCOREIMPORTNAME}_MatchFinder_Init_4{$else}MatchFinder_Ini
 
 implementation
 
-uses System.Win.Crtl;
+uses System.Win.Crtl, CPUArch;
 
 {$ifdef Win32}
   {$L Win32\LzFind.obj}
@@ -124,3 +128,4 @@ uses System.Win.Crtl;
 {$endif}
 
 end.
+

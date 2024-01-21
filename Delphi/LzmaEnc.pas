@@ -20,9 +20,17 @@ type
     fb: Integer;            (* 5 <= fb <= 273, default = 32 *)
     btMode: Integer;        (* 0 - hashChain Mode, 1 - binTree mode - normal, default = 1 *)
     numHashBytes: Integer;  (* 2, 3 or 4, default = 4 *)
+    numHashOutBits: UInt32; (* default = ? *)
     mc: UInt32;             (* 1 <= mc <= (1 << 30), default = 32 *)
     writeEndMark: Cardinal; (* 0 - do not write EOPM, 1 - write EOPM, default = 0 *)
     numThreads: Integer;    (* 1 or 2, default = 2 *)
+
+    // int _pad;
+
+    reduceSize: UInt64;     (* estimated size of data that will be compressed. default = (UInt64)(Int64)-1.
+                               Encoder uses this value to reduce dictionary size *)
+
+    affinity: UInt64;
   end;
 
 function LzmaEnc_Create(var alloc: TISzAlloc): TCLzmaEncHandle; cdecl; external
