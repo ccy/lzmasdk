@@ -37,7 +37,11 @@ EXTERN_C_BEGIN
 #define PPMD_N4 ((128 + 3 - 1 * PPMD_N1 - 2 * PPMD_N2 - 3 * PPMD_N3) / 4)
 #define PPMD_NUM_INDEXES (PPMD_N1 + PPMD_N2 + PPMD_N3 + PPMD_N4)
 
-MY_CPU_pragma_pack_push_1
+#if defined(__BORLANDC__)
+  #pragma pack(push, 1)
+#else
+  MY_CPU_pragma_pack_push_1
+#endif
 /* Most compilers works OK here even without #pragma pack(push, 1), but some GCC compilers need it. */
 
 /* SEE-contexts for PPM-contexts with masked symbols */
@@ -74,7 +78,11 @@ typedef struct CPpmd_State4_
   UInt16 Successor_1;
 } CPpmd_State4;
 
-MY_CPU_pragma_pop
+#if defined(__BORLANDC__)
+  #pragma pop
+#else
+  MY_CPU_pragma_pop
+#endif
 
 /*
    PPMD code can write full CPpmd_State structure data to CPpmd*_Context

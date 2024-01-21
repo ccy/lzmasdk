@@ -227,10 +227,14 @@ void Sha256_Init(CSha256 *p)
 void Z7_FASTCALL Sha256_UpdateBlocks_HW(UInt32 state[8], const Byte *data, size_t numBlocks);
 
 // static
+#ifdef _WIN64
 extern MY_ALIGN(64)
+#endif
 const UInt32 SHA256_K_ARRAY[64];
 
+#ifdef _WIN64
 MY_ALIGN(64)
+#endif
 const UInt32 SHA256_K_ARRAY[64] = {
   0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
   0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,

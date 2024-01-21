@@ -11,9 +11,13 @@ This code is based on PPMd var.H (2001): Dmitry Shkarin : Public domain */
 /* define PPMD7_ORDER_0_SUPPPORT to suport order-0 mode, unsupported by orignal PPMd var.H. code */
 // #define PPMD7_ORDER_0_SUPPPORT
  
+#ifdef _WIN64
 MY_ALIGN(16)
+#endif
 static const Byte PPMD7_kExpEscape[16] = { 25, 14, 9, 7, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2 };
+#ifdef _WIN64
 MY_ALIGN(16)
+#endif
 static const UInt16 PPMD7_kInitBinEsc[] = { 0x3CDD, 0x1F3F, 0x59BF, 0x48F3, 0x64A1, 0x5ABC, 0x6632, 0x6051};
 
 #define MAX_FREQ 124
